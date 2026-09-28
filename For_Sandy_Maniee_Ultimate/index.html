@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#08030d">
+<title>For Sandy  Somewhere Between Stars & Home</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+:root{--pink:#ff78ad;--rose:#ff477f;--lav:#c59cff;--gold:#ffe0a8;--white:#fff8fc;--muted:#d8c8d4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#07030b;color:var(--white);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+body.lock{overflow:hidden}
+#space,#aurora,#cursorGlow,#petals{position:fixed;inset:0;pointer-events:none}
+#space{z-index:0;background:
+radial-gradient(circle at 50% 35%,rgba(255,67,133,.09),transparent 28%),
+radial-gradient(circle at 20% 80%,rgba(166,105,255,.08),transparent 30%),
+linear-gradient(#05020a,#0d0512 60%,#050209)}
+#aurora{z-index:1;opacity:.35;background:radial-gradient(ellipse at 50% 110%,rgba(255,64,139,.3),transparent 55%);filter:blur(45px);animation:aurora 9s ease-in-out infinite alternate}
+#cursorGlow{z-index:2;width:320px;height:320px;inset:auto;left:0;top:0;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,119,177,.13),transparent 65%);mix-blend-mode:screen}
+canvas{position:fixed;inset:0;z-index:0}
+@keyframes aurora{to{transform:translateY(-25px) scale(1.12);opacity:.65}}
+main{position:relative;z-index:3}
+section{min-height:100vh;padding:80px 18px;display:grid;place-items:center;position:relative}
+.hero{text-align:center}
+.hero-inner{max-width:900px}
+.kicker{font:500 11px Inter,sans-serif;letter-spacing:.42em;text-transform:uppercase;color:#e9bdd2}
+.moon{width:120px;height:120px;border-radius:50%;margin:0 auto 28px;background:radial-gradient(circle at 33% 28%,#fff,#ffdce9 48%,#ff83b6);box-shadow:0 0 30px #ff9ac5,0 0 110px rgba(255,111,171,.28);animation:moon 5s ease-in-out infinite}
+@keyframes moon{50%{transform:translateY(-10px);box-shadow:0 0 45px #ffb0d0,0 0 150px rgba(255,111,171,.4)}}
+h1{font-size:clamp(76px,17vw,180px);line-height:.75;margin:0 0 25px;font-weight:600;background:linear-gradient(120deg,#fff,#ffafd0 42%,#ffe1a8 75%,#fff);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 10px 35px rgba(255,73,137,.2))}
+.hero p{font-size:clamp(20px,3vw,30px);line-height:1.45;color:var(--muted);margin:0 auto;max-width:700px}
+.enter{margin-top:42px;padding:17px 28px;border:1px solid rgba(255,195,220,.32);border-radius:999px;background:rgba(255,255,255,.06);color:white;font:600 12px Inter,sans-serif;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;backdrop-filter:blur(12px);transition:.35s}
+.enter:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 15px 60px rgba(255,61,137,.22);background:rgba(255,255,255,.1)}
+.card{width:min(940px,94vw);padding:clamp(28px,6vw,72px);border:1px solid rgba(255,192,218,.16);border-radius:38px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));box-shadow:0 30px 120px rgba(0,0,0,.45),inset 0 1px rgba(255,255,255,.08);backdrop-filter:blur(20px)}
+.title{text-align:center;font-size:clamp(40px,7vw,72px);line-height:1;margin:0 0 25px}.title em{color:var(--pink);font-style:normal}
+.letter{font-size:clamp(19px,2.5vw,25px);line-height:1.8;color:#f7e9f0}.letter p{margin:0 0 22px}
+.center{text-align:center}.soft{color:#d3c2ce}
+.reveal{opacity:0;transform:translateY(30px);transition:1s ease}.reveal.show{opacity:1;transform:none}
+#typed{min-height:130px}.cursor{border-right:2px solid var(--pink);animation:blink .8s infinite}@keyframes blink{50%{border-color:transparent}}
+.chapters{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;margin-top:32px}
+.chapter{padding:26px;border:1px solid rgba(255,255,255,.08);border-radius:25px;background:rgba(255,255,255,.045);cursor:pointer;transition:.4s;position:relative;overflow:hidden}
+.chapter:after{content:"";position:absolute;inset:-50%;background:radial-gradient(circle,rgba(255,111,171,.12),transparent 45%);opacity:0;transition:.4s}
+.chapter:hover{transform:translateY(-8px);border-color:rgba(255,145,190,.25)}.chapter:hover:after{opacity:1}
+.chapter b{display:block;font-size:22px;margin-bottom:8px}.chapter small{font:14px/1.6 Inter,sans-serif;color:#cfc0ca}
+#chapterText{margin-top:25px;display:none;padding:22px;border-left:2px solid var(--pink);color:#f3e2eb;font-size:20px;line-height:1.7}
+.constellation{height:340px;position:relative;margin:20px 0}.star{position:absolute;width:7px;height:7px;border-radius:50%;background:white;box-shadow:0 0 16px #fff;cursor:pointer;transition:.3s}.star:hover{transform:scale(2)}.star:after{content:'';position:absolute;inset:-12px;border-radius:50%}
+.constellation svg{position:absolute;inset:0;width:100%;height:100%}.constellation line{stroke:rgba(255,175,207,.18);stroke-width:1}
+.heart-stage{height:300px;display:grid;place-items:center;position:relative}.giant-heart{font-size:110px;cursor:pointer;filter:drop-shadow(0 0 25px rgba(255,57,128,.5));animation:heartbeat 1.7s infinite}.giant-heart:active{transform:scale(.9)}@keyframes heartbeat{50%{transform:scale(1.08)}}
+.counter{font:12px Inter,sans-serif;letter-spacing:.12em;color:#bcaab5;text-align:center;margin-top:15px}
+.promise{text-align:center;font-size:clamp(28px,5vw,53px);line-height:1.4}.promise span{color:var(--pink)}
+.final .card{text-align:center}.seal{font-size:78px;filter:drop-shadow(0 0 30px rgba(255,160,190,.35))}
+.open{margin-top:25px;padding:17px 27px;border:0;border-radius:999px;background:linear-gradient(120deg,#ff4e91,#a557ce);color:white;font:600 12px Inter,sans-serif;letter-spacing:.14em;cursor:pointer;box-shadow:0 14px 45px rgba(255,65,139,.25);transition:.3s}.open:hover{transform:translateY(-3px)}
+#secret{display:grid;grid-template-rows:0fr;transition:1.2s;margin-top:25px}.secret-inner{overflow:hidden}.secret-content{padding-top:10px}
+#secret.open{grid-template-rows:1fr}
+.signature{font-size:32px;color:#ffb4d0;margin-top:28px}
+.footer{text-align:center;padding:40px 20px 70px;color:#8f7d89;font:11px Inter,sans-serif;letter-spacing:.13em}
+.float{position:fixed;z-index:4;bottom:-40px;pointer-events:none;animation:float 7s linear forwards}.spark{position:fixed;z-index:4;pointer-events:none;animation:spark 1s ease-out forwards}@keyframes float{to{transform:translateY(-115vh) translateX(var(--x)) rotate(360deg);opacity:0}}@keyframes spark{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+#letterOverlay{position:fixed;inset:0;z-index:20;background:rgba(5,2,9,.94);display:grid;place-items:center;padding:20px;transition:.8s}.envelope{width:min(540px,92vw);text-align:center;padding:55px 30px;border-radius:30px;background:linear-gradient(145deg,#180917,#0b050f);border:1px solid rgba(255,190,220,.18);box-shadow:0 30px 100px #000}.envelope .heart{font-size:80px;animation:heartbeat 1.7s infinite}.envelope h2{font-size:42px;margin:10px}.envelope p{font-size:18px;color:#cdbdc7}.envelope button{margin-top:20px}.gone{opacity:0;pointer-events:none}
+@media(max-width:600px){section{padding:65px 12px}.card{border-radius:27px}.moon{width:90px;height:90px}.constellation{height:270px}}
+</style>
+</head>
+<body class="lock">
+<div id="space"><canvas id="stars"></canvas></div><div id="aurora"></div><div id="cursorGlow"></div><div id="petals"></div>
+
+<div id="letterOverlay">
+  <div class="envelope">
+    <div class="heart">♥</div>
+    <div class="kicker">a little something for</div>
+    <h2>Sandy</h2>
+    <p>Some things are easier to feel than to say. So I made you a tiny universe.</p>
+    <button class="enter" id="begin">open your universe ✦</button>
+  </div>
+</div>
+
+<main>
+<section class="hero">
+ <div class="hero-inner">
+  <div class="moon"></div><div class="kicker">if the universe had a favourite person</div>
+  <h1>Sandy.</h1>
+  <p id="typed"><span class="cursor"></span></p>
+  <button class="enter" onclick="document.getElementById('story').scrollIntoView()">there's more ↓</button>
+ </div>
+</section>
+
+<section id="story">
+ <div class="card reveal">
+  <h2 class="title">My first impression was <em>wrong.</em></h2>
+  <div class="letter">
+   <p>At first, I thought you were simply someone I would talk to every now and then.</p>
+   <p>Then you started telling me about your day. Every tiny detail. Every random thought. Every little moment that probably seemed ordinary to you.</p>
+   <p>And somehow, every little detail started becoming precious to me.</p>
+   <p>That is the thing about you, Sandy. You never have to try to make a moment beautiful. Somehow, your presence does it for you.</p>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="card reveal">
+  <h2 class="title">Choose a little <em>memory.</em></h2>
+  <p class="center soft">Tap one. I hid a thought inside each.</p>
+  <div class="chapters">
+   <div class="chapter" onclick="chapter(0)"><b>🐈‍⬛ The kitten theory</b><small>There is a very scientific explanation for why you're adorable.</small></div>
+   <div class="chapter" onclick="chapter(1)"><b>💌 The little details</b><small>The things you casually tell me that I secretly remember.</small></div>
+   <div class="chapter" onclick="chapter(2)"><b>🌙 The feeling</b><small>The part I can't properly explain.</small></div>
+   <div class="chapter" onclick="chapter(3)"><b>✨ The truth</b><small>The sentence I keep failing to make small enough.</small></div>
+  </div>
+  <div id="chapterText"></div>
+ </div>
+</section>
+
+<section>
+ <div class="card reveal">
+  <h2 class="title">I made you a <em>constellation.</em></h2>
+  <p class="center soft">Every glowing star is something I love about you. Tap the stars.</p>
+  <div class="constellation" id="constellation">
+   <svg viewBox="0 0 900 340" preserveAspectRatio="none"><line x1="120" y1="180" x2="280" y2="90"/><line x1="280" y1="90" x2="430" y2="220"/><line x1="430" y1="220" x2="590" y2="110"/><line x1="590" y1="110" x2="760" y2="180"/><line x1="280" y1="90" x2="590" y2="110"/></svg>
+   <i class="star" style="left:13%;top:52%" onclick="star(0)"></i><i class="star" style="left:30%;top:25%" onclick="star(1)"></i><i class="star" style="left:47%;top:64%" onclick="star(2)"></i><i class="star" style="left:65%;top:31%" onclick="star(3)"></i><i class="star" style="left:83%;top:52%" onclick="star(4)"></i>
+  </div>
+  <p id="starText" class="center letter" style="min-height:45px"></p>
+ </div>
+</section>
+
+<section>
+ <div class="card reveal">
+  <h2 class="title">One tiny <em>experiment.</em></h2>
+  <p class="center soft">Tap the heart. Every tap is another reason the universe should know you're loved.</p>
+  <div class="heart-stage"><div class="giant-heart" id="heart">♥</div></div>
+  <div class="counter"><span id="count">0</span> little pieces of affection released into the universe</div>
+ </div>
+</section>
+
+<section>
+ <div class="card reveal">
+  <div class="promise">
+   “I could compare you to stars, sunsets, flowers and songs…<br>
+   but honestly, <span>all of them feel slightly offended.</span><br>
+   None of them quite get there.”
+  </div>
+ </div>
+</section>
+
+<section class="final">
+ <div class="card reveal">
+  <div class="seal">💗</div>
+  <h2 class="title">Okay, Sandy.<br><em>One last thing.</em></h2>
+  <p class="letter center">You asked me to explain how I perceive you in extreme detail.</p>
+  <p class="promise">There aren't enough words.</p>
+  <button class="open" id="open">open the part words can't say</button>
+  <div id="secret"><div class="secret-inner"><div class="secret-content letter">
+   <p>I love you. More than these sentences can carry. More than this little universe could ever show.</p>
+   <p>Sometimes I think words are simply too small for what I feel when I think about you.</p>
+   <p>So if you ever wonder what my first impression of you was, let me tell you the truth.</p>
+   <p><strong>My first impression was nothing compared to the person I came to know.</strong></p>
+   <p>Somewhere between all those conversations, all those tiny stories, all those moments you probably never thought twice about, you became incredibly important to me.</p>
+   <p class="promise">If life ever gives me a thousand beautiful memories, I hope your name finds its way into every one of them.</p>
+   <p>And Sandy, if there is one thing I hope you always remember, it is this.</p>
+   <p><strong>You are loved. You are cherished. You are irreplaceable.</strong></p>
+   <p>And no matter how beautifully the world changes around us, a part of my heart will always be grateful that it got to know you.</p>
+   <p>With all the words I have, and all the words I will never find.</p>
+   <div class="signature">Maniee ❤️</div>
+  </div></div></div>
+ </div>
+</section>
+<div class="footer">made from one very full heart • for Sandy • 2026</div>
+</main>
+
+<script>
+const phrases=[
+"the person who makes ordinary days feel a little more magical.",
+"the person whose tiniest stories somehow become my favourite stories.",
+"the person who makes my heart forget how to behave.",
+"the person I could write a thousand words about… and still have a thousand more to say."
+];
+let pi=0,ci=0;
+function typePhrase(){
+ const el=document.getElementById('typed'); let s=phrases[pi], out='',i=0;
+ const t=setInterval(()=>{out+=s[i++];el.innerHTML=out+'<span class="cursor"></span>';if(i>=s.length){clearInterval(t);setTimeout(()=>{pi=(pi+1)%phrases.length;typePhrase()},1900)}},42)
+}
+typePhrase();
+
+const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');let W,H,pts=[];
+function resize(){W=canvas.width=innerWidth*devicePixelRatio;H=canvas.height=innerHeight*devicePixelRatio;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';pts=Array.from({length:Math.min(180,innerWidth/5)},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.2,a:Math.random(),s:Math.random()*.015+.003}))}
+function draw(){ctx.clearRect(0,0,W,H);for(const p of pts){p.a+=p.s;if(p.a>1||p.a<.1)p.s*=-1;ctx.globalAlpha=p.a*.7;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fill()}requestAnimationFrame(draw)}resize();addEventListener('resize',resize);draw();
+
+addEventListener('pointermove',e=>{const g=document.getElementById('cursorGlow');g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
+
+document.getElementById('begin').onclick=()=>{document.getElementById('letterOverlay').classList.add('gone');document.body.classList.remove('lock');typeSparks(innerWidth/2,innerHeight/2,32)};
+const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.15});document.querySelectorAll('.reveal').forEach(x=>observer.observe(x));
+
+const chapterWords=[
+"There is a completely scientific reason you are this adorable. You are part kitten, part sunshine, and part beautiful little chaos. Somehow, every part of you makes me smile.",
+"The little things you tell me are not just details anymore. They feel like tiny windows into your world, and I love being allowed to look through them.",
+"You have this beautiful way of making a conversation feel like a place I belong. A place where everything feels a little quieter and a little warmer.",
+"I love you in a way that makes language feel impossibly small. I could dress it in the most beautiful words in the world, and they still would not be enough. It is simply true."
+];
+function chapter(i){const e=document.getElementById('chapterText');e.style.display='block';e.textContent=chapterWords[i];typeSparks(event.clientX,event.clientY,10)}
+
+const stars=[
+"Your kindness  the quiet kind that doesn't ask to be noticed.",
+"The way you get excited to talk to me. I hope you know how much that means.",
+"Your ridiculous, impossible adorableness. Yes, I am blaming the kitten theory.",
+"The way you make ordinary conversations feel like memories.",
+"The fact that somehow, out of all the people in the world, I got to know you."
+];
+function star(i){document.getElementById('starText').textContent=stars[i];typeSparks(event.clientX,event.clientY,8)}
+
+let count=0;document.getElementById('heart').onclick=e=>{count++;document.getElementById('count').textContent=count;typeSparks(e.clientX,e.clientY,12);floatHeart()};
+function floatHeart(){const h=document.createElement('div');h.className='float';h.textContent=['♥','♡','✦','💗'][Math.floor(Math.random()*4)];h.style.left=Math.random()*100+'vw';h.style.fontSize=15+Math.random()*24+'px';h.style.setProperty('--x',(Math.random()*180-90)+'px');h.style.color='#ff8eb9';document.getElementById('petals').appendChild(h);setTimeout(()=>h.remove(),7000)}
+setInterval(floatHeart,1400);
+function typeSparks(x,y,n){for(let i=0;i<n;i++){const s=document.createElement('div');s.className='spark';s.textContent=Math.random()>.45?'✦':'♥';s.style.left=x+'px';s.style.top=y+'px';s.style.color=Math.random()>.5?'#ffd7e8':'#ff77ad';s.style.setProperty('--x',(Math.random()*240-120)+'px');s.style.setProperty('--y',(Math.random()*240-120)+'px');s.style.fontSize=8+Math.random()*15+'px';document.body.appendChild(s);setTimeout(()=>s.remove(),1000)}}
+document.getElementById('open').onclick=()=>{document.getElementById('secret').classList.add('open');document.getElementById('open').textContent='this little piece of my heart is yours ❤️';document.getElementById('open').disabled=true;typeSparks(innerWidth/2,innerHeight/2,55)};
+</script>
+</body>
+</html>
